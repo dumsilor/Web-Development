@@ -1,0 +1,36 @@
+<!-- span inline element -->
+<!-- Span only element er jayga ney  -->
+<!-- Block Element Pura jayga dokhol kore -->
+<style>
+
+    /*display property diye element er default display value change kora jay*/
+
+    span{
+        width: 100px;               /* span e width change kora jay na, ei property er kono value nai */
+        display: block;             /* Orginally inline but block er moto behave korbe*/
+    }
+    p {
+        width: 100px;                /* eta diye block element er width change kora jay */
+        display: inline;             /*Orgnially block but inlin er moto behave korbe */
+    }
+    .ib {
+        display: inline-block;       /* block display + inline display = inline-block display*/
+                                     /* Ei display te inline and block er shob feature thake*/
+        width: 100px;                /* block er moto widht chage kore jay and also element er pase onno element boshte pare*/
+    }
+    .no {
+        display: none;                 /* eta diye display te ar kichu dekhabe na, and behave korbe j element never exist */
+    }
+    .vis{
+        visibility: hidden;             /* Ei property same as display: none but eta occupied jayga chere dibe na, element er jayga blank dekhabe */
+    }
+</style>
+
+
+<span style="background-color: yellow;">Hi</span>
+<p style="background-color: yellow;">Hi</p>
+<p class="ib">This will be inline-block</p>
+<p class="no">This will got get shown</p>
+<p class="vis">This Will be invisible</p>
+
+
