@@ -1,0 +1,74 @@
+<!-- 
+    By Default Position rules:
+        1. content is everything: inline(span), block(Height determinded by content), contents define kore
+                                  koto height or weidth 
+        2. Order comes from code
+        3. Children seats on top of parent:
+            <div>
+                <h1>Heading</h1>
+            </div>
+           ekahne div er upore H1 seat korbe, mane h1 more towards the viewr and away from the screen.
+           eta k "Z index" bole
+ 
+
+          css position property diye defult positioning change kora jay
+          1. static: by default, abide by HTML rule
+          2. relative: static position e jevabe chilo oita er sathe compare kore, perameter gula add kore
+            cordinates:
+            a. top: nicher dike push korbe 
+            b. bottom : uporer dike push korbe
+            c. left: right side e push korbe
+            d. right: left side e push korbe
+            jokhon kono relative elemeet er position change kora hobe tokhon kono screen er onno 
+            element k effect korbe na, old position rekhe dibe and ase pase shob flote korbe
+          3. 
+
+          absolute position:
+          1. Absolutre Position e parent elemnt k reference hisab e dhore
+          2. 
+
+          Fixed:
+          -> jekhane fix kora hobe sekhane theke move korbe na
+ -->
+<head>
+    <style>
+        body{
+            margin: 0;
+        }
+        .red {
+            background-color: red;
+            height: 100px;
+            width: 100px;
+            display: inline-block;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+        .blue {
+            background-color: blue;
+            height: 100px;
+            width: 100px;
+            display: inline-block;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+
+        }
+        .gr {
+            background-color: green;
+            height: 100px;
+            width: 100px;
+            display: inline-block;
+
+        }
+    </style>
+</head>
+
+ <body>
+    <div class="red">
+    </div>
+    <div class="blue">
+    </div>
+    <div class="gr">
+    </div>
+ </body> 
