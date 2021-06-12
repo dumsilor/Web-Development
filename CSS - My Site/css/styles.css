@@ -1,42 +1,171 @@
+/*
+Static Pixel Size: number er pore "px" diye static use kora jay
+Dynamic Pixel Size:
+                1.  % diye korte hoy:
+                    100% = 16px
+                    90px  = (90/16)x100 = 5.625 x 100 = 562.5% 
+                2. em diye use kora jay
+                    1em = 100% = 16px
+                    90px = 90/16 = 5.625em
+                    em parent er size er upore inherit kore
+                3. Parent inheritence problem solve korar jonno "ripped em" or "rem" use kora hoy
+** Clear property diye  image wrap change kora jay
+
+*/
 body{
     margin: 0px;
     text-align: center;
+    color:#40514E;
+    line-height: 2;
+
 }
 
 .top-container {
   background-color: #E4F9F5;
   position:relative;
   padding-top: 100px;
+  margin-bottom: 30px;
   
 }
 
 h1{
     font-family: 'Dancing Script', cursive;
+    font-size: 5.625em;
+    padding-top: 50px;
+    line-height: 2;
+    color: #66BFBF;
 }
 
 h2{
      font-family: 'Lobster', cursive;
+     font-size: 2.5rem;
+     font-weight: normal;
+     color: #66BFBF;
+     padding: px;
 }
 
 h3 {
     font-family: 'Crimson Text', serif;
+    color: #11999E;
 }  
 
+hr {
+    border-style: none;
+    border-top-style: dotted;
+    border-width: 6px;
+    width: 4%;
+    margin: 150px auto;
+    border-color: #EAF6F6;
+}
+
+
+.intro {
+    width:30%;
+    margin:auto;
+}
+
 .middle-container {
-    
+    padding: 100px 0;
 }
 
 .bottom-container {
+    background-color: #66BFBF;
+    margin-top: 50px;
+    padding: 50px 50px 0px 50px;
+}
+
+
+.footer-link {
+    text-decoration: none;
+    color: #11999E;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.copyright {
     
+    color:#EAF6F6;
+    font-size: 0.75rem;
+    margin-bottom:0;
+    padding: 20px 0;
 }
 
 .top-cloud {
     position: absolute;
     top: 50px;
-    right: 200px;
+    right: 30rem;
 
 }
 .bottom-cloud {
     position: absolute; /*parent directory hisab e top-container k dhora hoise ei jonno oitar position k reltive kore dea ase*/
-    left: 200px;
+    left: 20.5rem;
+    margin-top: 100px;
+}
+
+
+.profile img {
+    height:200px;
+    width: 200px;
+}
+
+.skill-row {
+    width: 50%;
+    margin: 100px auto 100px auto;
+    text-align: left;
+    padding: 30px;
+
+}
+
+.skill-icon-1 {
+    width: 25%;
+    float: left;
+    margin-right: 30px;
+}
+
+.skill-icon-2 {
+    width: 25%;
+    float: right;
+
+}
+
+.skill-icon-3 {
+    width: 25%;
+    float: left;
+    margin: 30px;
+}
+
+
+.btn {
+   background: #66BFBF;
+   background-image: -webkit-linear-gradient(top, #66BFBF, #11999E);
+   background-image: -moz-linear-gradient(top, #66BFBF, #11999E);
+   background-image: -ms-linear-gradient(top, #66BFBF, #11999E);
+   background-image: -o-linear-gradient(top, #66BFBF, #11999E);
+   background-image: -webkit-gradient(to bottom, #66BFBF, #11999E);
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   color: #FFFFFF;
+   font-family: Tahoma;
+   font-size: 15px;
+   font-weight: 100;
+   padding: 10px;
+   border: solid #69BFBF 1px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+   text-align: center;
+}
+
+.btn:hover {
+   border: solid #11BFBF 1px;
+   background: #10BFBF;
+   background-image: -webkit-linear-gradient(top, #10BFBF, #01999E);
+   background-image: -moz-linear-gradient(top, #10BFBF, #01999E);
+   background-image: -ms-linear-gradient(top, #10BFBF, #01999E);
+   background-image: -o-linear-gradient(top, #10BFBF, #01999E);
+   background-image: -webkit-gradient(to bottom, #10BFBF, #01999E);
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   text-decoration: none;
 }
