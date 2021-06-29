@@ -1,0 +1,194 @@
+#title {
+    background-color: #ff4c68;
+}
+h1 {  
+    font-family: 'Montserrat', sans-serif;   
+    font-size: 3rem;  
+    line-height: 1.5;  
+    font-weight: 900;
+    color: white;
+    
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size:2.5rem;
+    line-height: 1.5;
+    color: white;
+}
+
+.container-fluid {
+    padding:3% 15% 7%;
+
+}
+
+.img1 {
+    transform: rotate(20deg);
+    width: 20rem;
+    position: absolute;
+    right:15%;
+}
+
+@media (max-width: 1024px) {
+    
+    #title {
+    background-color: #ff4c68;
+    text-align: center;
+    }
+
+    .img1 {
+    transform: rotate(0);
+    width: 20rem;
+    position: static;
+    }
+}
+
+.logo{
+    font-family: 'ubuntu', cursive;
+    font-size: 2.5rem;
+}
+
+.navbar {
+    padding: 0 0 4.5rem;
+}
+
+.nav-item {
+    padding: 0 18px;
+}
+
+.nav-link {
+    font-size:1.5rem;
+}
+
+.download-button{
+    margin: 5% 3% 5% 0;
+}
+
+
+/*Feature*/
+
+#features{
+    background-color: white;
+    position:relative;
+    z-index: 1;
+}
+
+.feature-container {
+    text-align: center;
+    padding: 7% 15%;
+}
+
+
+.feature-header {
+    font-family: Montserrat, sans-serif;
+    font-size: 1.5rem;
+}
+
+.feature-text{
+    color: #8f8f8f
+}
+
+.feature-icons {
+    color:#ef8172;
+    padding: 25px;
+}
+
+.feature-icons:hover {
+    color:#ff4c68;
+}
+
+
+/*Testimonial Section*/
+
+
+#testimonials {
+    background-color: #ef8172;
+    text-align: center;
+    color: white
+}
+
+.carousel-item {
+    padding: 7% 15%;
+
+}
+
+.testimonial-image {
+    width: 10%;
+    border-radius: 100%;
+    margin:20px;
+}
+
+
+/*Press Section*/
+
+#press {
+    background-color:#ef8172;
+    text-align: center;
+    padding-bottom: 3%;
+}
+
+.press-image{
+    width: 10%;
+    margin:1% 5%;
+}
+
+
+
+/*pricing*/
+
+#pricing{
+    margin:0.5% 0;
+    padding: 100px;
+    text-align: center;
+}
+
+.row{
+    padding: 3% 2%;
+}
+
+.price{
+    color:black;
+}
+
+.pricing-header
+{
+    color:black;
+}
+
+
+/*Call to action*/
+#cta{
+    background-color: #ff4c68;
+    text-align: center;
+    padding:5% 0;
+    
+}
+
+.cta-header{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: white;
+    padding: 0 0 2%;
+    width: 31.25%;
+    margin: auto;
+}
+
+.cta-btn {
+    margin: 30px 0 0 30px;
+
+}
+
+
+/*footer*/
+#footer{
+    padding: 3% 0 1% 0;
+    text-align: center;
+}
+
+.footer-icon{
+    padding: 0 10px 0 10px;
+}
+
+.copyright{
+    margin: 10px 0 0 0;
+}
