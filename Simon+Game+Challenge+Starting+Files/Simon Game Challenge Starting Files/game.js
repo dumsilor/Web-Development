@@ -38,6 +38,7 @@ function checkAnswer(currentLevel){
         var audio = new Audio ("sounds/wrong.mp3");
         audio.play();
         $("#level-title").text("Game Over");
+        starOver();
 
     }
 }
@@ -80,3 +81,8 @@ function animatePress(currentColor){
     },100);
 } 
 
+function starOver() {
+    gamePattern = [];
+    started = false;
+    level = 0;
+}
