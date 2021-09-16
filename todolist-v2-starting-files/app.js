@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 // const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 const app = express();
 
@@ -28,7 +29,14 @@ const item2 = new Item ({
   name: "Feed Cat"
 })
 
+const defaultItems = [item1,item2]
 
+const listSchema  = new mongoose.Schema({
+  name: String,
+  items: [itemSchema]
+})
+
+const List = mongoose.model("list",listSchema)
 
 app.get("/", function(req, res) {
   
@@ -47,36 +55,78 @@ app.get("/", function(req, res) {
     }
     
   });
-  
 
 });
+
+app.get("/:customListName",function(req,res){
+ const customListName = _.capitalize(req.params.customListName);
+
+ List.findOne({name: customListName},function(err,foundList){
+   if (!err){
+    if (!foundList){
+      const list = new List({
+        name: customListName,
+        items: []
+        });
+        list.save();
+        res.redirect("/" + customListName);
+    } else{
+        res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+    }
+    } 
+  
+ })
+
+}); 
+ 
 
 app.post("/", function(req, res){
 
   const item = req.body.newItem;
+  const listName = req.body.list
   const new_Item = new Item({
     name: item
   })
-  new_Item.save();
-  res.redirect("/");
+  
+  if (listName === "Today"){
+    new_Item.save();
+    res.redirect("/");
+  } else {  
+    List.findOne({name: listName}, function(err, foundList){
+      foundList.items.push(new_Item);
+      foundList.save();
+      res.redirect("/" + listName);
+    })
+   
+  }
 });
 
 app.post("/delete",function(req,res){
   const id = req.body.checkbox;
-  Item.deleteOne({_id:id},function(err){
-    if (err) {
-      console.log(err)
-    } else {
-      console.log(id+ " deleted!")
-    }
-   
-  })
-  res.redirect("/")
+  const listName = req.body.listName;
+
+  if (listName ==="Today") {
+      Item.deleteOne({_id:id},function(err){
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(id+ " deleted!")
+      }
+    
+    })
+    res.redirect("/")
+  } else {
+     List.findOneAndUpdate({name: listName},{$pull: {items: {_id:id}}}, function(err, foundList){
+       if (!err) {
+        res.redirect("/"+listName)
+      }
+     })
+  }
+
+  
 });
 
-app.get("/work", function(req,res){
-  res.render("list", {listTitle: "Work List", newListItems: workItems});
-});
+
 
 app.get("/about", function(req, res){
   res.render("about");
