@@ -1,0 +1,14 @@
+{
+  "name": "ic_login_page",
+  "version": "1.0.0",
+  "description": "This will be the login page for IC App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Md. Mosiur Rahman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
