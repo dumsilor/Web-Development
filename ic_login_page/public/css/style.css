@@ -1,0 +1,21 @@
+body {
+    background-color: #082032;
+    color: #F7F6F2;
+
+}
+
+.links{
+    color: #F7F6F2;
+    text-decoration: none;
+    /* margin: 4px 2px; */
+    transition: 0.35s;
+    font-family: 'Merriweather', serif;
+    opacity: 0.5;
+}
+
+.links:hover {
+    font-size: 150%;
+    opacity: 1;
+    color: #F7F6F2;
+
+}
