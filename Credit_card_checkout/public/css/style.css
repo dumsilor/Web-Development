@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    padding: 1rem;
+
+}
+
+.form{
+    background-color: #293B5F;
+    margin: 10rem;
+    padding: 10rem;
+    border-radius: 1.5rem;
+}
+
+input{
+    width: 50%;
+    margin:1rem;
+    /* display: block; */
+}
+
+label{
+    margin-left: 1rem;
+    color: #DBE6FD;
+    margin-right: 1rem;
+}
+
+.exp{
+    width: 30%;
+}

@@ -1,0 +1,41 @@
+body{
+  margin: 0px;
+  border: 0;
+
+}
+
+.nav {
+  background-color: #F6D7A7;
+  padding: 0px;
+  postion: top;
+}
+
+.nav::after{
+  content: '';
+  display: table;
+  clear: both;
+}
+
+ul{
+  list-style: none;
+}
+
+.nav-left,.logo {
+  float: left;
+}
+.nav-right {
+  float: right;
+}
+.nav a {
+  padding: 2rem;
+  text-decoraton: none;
+}
+
+.nav ul a:hover{
+  background-color: black;
+}
+
+.div{
+  padding: 0px;
+  margin: 0px
+}

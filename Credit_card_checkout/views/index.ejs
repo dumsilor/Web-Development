@@ -1,0 +1,29 @@
+<%- include("partials/header") %> 
+   
+   <div class="form">
+    <form action="/" method="post">
+        <div>
+            <label for="cardNumber">Card Number</label>
+            <input type="text" name="cardNumber" id="cardNumber">
+        </div>
+        <div class="exp">
+            <label for="expDate_m">Expire month</label>
+            <input type="text" name="expDate_m" id="expDate_m">
+            <label for="expDate_y">Expire year</label>
+            <input type="text" name="expDate_y" id="expDate_y">
+        </div>
+
+        <div>
+            <label for="user">Name on Card</label>
+            <input type="text" name="user" id="user">
+        </div>
+        <div>
+            <label for="cvv">Security Number</label>
+            <input type="text" name="cvv" id="cvv">
+        </div>
+        
+    </form>
+   </div>
+    
+
+<%- include("partials/tailer") %>
