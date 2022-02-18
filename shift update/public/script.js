@@ -59,10 +59,13 @@ const dateTimeShift = time + " " + dateValue + ", " + shiftValue;
 
 
 document.getElementById("idate").value = dateValue;
+document.getElementById("ntkDate").value = dateValue;
 document.getElementById("SCdate").value = dateTime;
 document.getElementById("LSdate").value = dateTime;
 document.getElementById("bbDate").value = dateTime;
 document.getElementById("fuDate").value = dateTime;
 document.getElementById("scLastUpdateDate").value = dateTimeShift;
 document.getElementById("lsLastUpdateDate").value = dateTimeShift;
+document.getElementById("bbLastUpdateDate").value = dateTimeShift;
+document.getElementById("fuLastUpdateDate").value = dateTimeShift;
 document.getElementById("updateHeader").innerHTML = "Shift Update || Date: " + dateValue;

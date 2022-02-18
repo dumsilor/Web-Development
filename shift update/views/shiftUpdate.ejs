@@ -111,12 +111,12 @@ D - Delete  - Pending
     <section class="backbone">
             <div class="backboneDisplay">
                 <h3 class="sectionHeader">Backbone Issue</h3>
-                <p class="case"><b>Issue: </b></p>
-                <p class="summary"><b>Summary: </b></p>
-                <p class="action"><b>Action: </b></p>
-                <p class="mailRef"><b>Mail Ref:</b></p>
-                <p class="date">Date: </p>
-                <p class="lastUpdated">Last Updated: </p>
+                <p class="case"><b>Issue: </b><%= bbIssue %></p>
+                <p class="summary"><b>Summary: </b><%= bbSummary %></p>
+                <p class="action"><b>Action: </b><%= bbAction %></p>
+                <p class="mailRef"><b>Mail Ref: </b><%= bbMailRef %></p>
+                <p class="date"><b>Date: </b><%= bbDate %> </p>
+                <p class="lastUpdated"><b>Last Updated: </b><%= bbLastUpdated %></p>
             </div>
             <div class="backboneEntry entryForm">
                 <form action="/backbone" method="post">
@@ -130,6 +130,7 @@ D - Delete  - Pending
                     <textarea name="bbSummary" id="bbSummary" cols="30" rows="10"></textarea>
                     <label for="bbAction">Action: </label>
                     <textarea name="bbAction" id="bbAction" cols="30" rows="10"></textarea>
+                    <input type="hidden" name="bbLastUpdateDate" id="bbLastUpdateDate">
                     <button type="submit">Enter</button>
                     <button type="reset">Reset</button>
                 </form>
@@ -161,6 +162,7 @@ D - Delete  - Pending
                 <textarea name="fuSummary" id="fuSummary" cols="30" rows="10"></textarea>
                 <label for="fuAction">Action: </label>
                 <textarea name="fuAction" id="fuAction" cols="30" rows="10"></textarea>
+                <input type="hidden" name="fuLastUpdateDate" id="fuLastUpdateDate">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>
@@ -169,16 +171,16 @@ D - Delete  - Pending
     
     <hr>
 
-    <section>
-        <div class="needToKnow">
+    <section class="needToKnow">
+        <div class="needToKnowDisplay">
             <h3 class="sectionHeader">Need To Know</h3>
             <ul>
-                <li class="listElement">If any VPN related documents come, need to forward it to Sajjad vai & Krishnendu da
-                    <span class="date">[]</span></li>
+                <li class="listElement"><%= ntkInfo %> 
+                    <span class="date">[ <%= ntkDate %>  ]</span></li>
             </ul>
         </div>
-        <div class="importantEntry entryForm">
-            <form action="/important" method="post">
+        <div class="needToKnowEntry entryForm">
+            <form action="/needToKnow" method="post">
                 <label for="ntkInfo">Information: </label>
                 <input type="text" name="ntkInfo" id="ntkInfo">
                 <label for="ntkDate">Date: </label>
@@ -197,19 +199,19 @@ D - Delete  - Pending
         <table>
             <tr>
                 <td><b>Maintenance ID</b></td>
-                <td></td>
+                <td><%= maintenanceId %> </td>
             </tr>
             <tr>
                 <td><b>Activity Window</b></td>
-                <td></td>
+                <td><%= maintenanceWindow %></td>
             </tr>
             <tr>
                 <td><b>Activity Details</b></td>
-                <td></td>
+                <td><%= maintenanceDetails %></td>
             </tr>
             <tr>
                 <td><b>Impact</b></td>
-                <td></td>
+                <td><%= maintenanceImpact %></td>
             </tr>
         </table>
         </div>
@@ -223,6 +225,8 @@ D - Delete  - Pending
                 <textarea name="details" id="details" cols="30" rows="10"></textarea>
                 <label for="impact">Impact: </label>
                 <textarea name="impact" id="impact" cols="30" rows="10"></textarea>
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
             </form>
         </div>
     </section>
