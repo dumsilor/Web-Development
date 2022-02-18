@@ -1,0 +1,23 @@
+body{
+    background-color: #261C2C;
+}
+div {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8em;
+    font-weight: bold;
+    color: #FBF8F1;
+    
+}
+
+p{
+    margin: auto;
+    text-align: center;
+}
+
+#clock{
+    padding: 10% 0 0 0;
+}
+
+div > .subject {
+    font-size: 4rem;
+}

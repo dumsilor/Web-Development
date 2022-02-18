@@ -1,0 +1,232 @@
+<!-- 
+1.
+
+C- CReate - On process
+R - read  - Pending
+U - Update - Pending
+D - Delete  - Pending
+
+2. Design;
+3. Implementation
+4. Testing
+5. Production
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift-Update</title>
+</head>
+<body>
+    <h1 id="updateHeader"></h1>
+    <section class="important">
+        <div class="importantDisplay">
+            <h3 class="sectionHeader">Important</h3>
+            <ul>
+                <li class="listElement"> <%= information %>  <span
+                        class="date">[<%= iDate %> ]</span></li>
+            </ul>
+        </div>
+        <div class="importantEntry entryForm">
+            <form action="/important" method="post">
+                <label for="info">Information: </label>
+                <input type="text" name="info" id="info" required>
+                <label for="idate">Date: </label>
+                <input type="text" name="date" class="date_class" id="idate">
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </section>
+    
+    
+    <hr>
+
+    <section class="serviceChange">
+        <div class="serviceChangeDisplay">
+            <h3 class="sectionHeader">Service Change(Upgrade/Downgrade/activation/deativation/Termination)</h3>
+            <p class="case"><b>Client Name: </b><%= scIssue %> </p>
+            <p class="action"><b>Activity: </b><%= scAction %> </p>
+            <p class="rfs"><b>RFS: </b><%= rfs %> </p>
+            <p class="mailRef"><b>Mail Ref:</b> <%= scMailRef %> </p>
+            <p class="date"><b>Date: </b><%= scDate %> </p>
+            <p class="lastUpdated"><b>Last Updated: </b><%= scLastUpdated %> </p>
+        </div>
+        <div class="serviceChangeEntry entryForm">
+            <form action="/serviceChange" method="post">
+                <label for="cName">Client Name: </label>
+                <input type="text" name="cName" id="cName" required>
+                <label for="SCdate">Date: </label>
+                <input type="text" name="date" class="date_class" id="SCdate" required>
+                <label for="rfs">RSF: </label>
+                <input type="text" name="rfs" id="rfs">
+                <label for="scMailRef">Mail Reference: </label>
+                <input type="text" name="scMailRef" id="scMailRef" required>
+                <label for="activity">Activity: </label>
+                <textarea name="activity" id="activity" cols="30" rows="10"></textarea>
+                <input type="hidden" name="scLastUpdateDate" id="scLastUpdateDate">
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </section>
+
+    
+    <hr>
+
+    <section class="linkStatus">
+        <div class="linkStatusDisplay">
+            <h3 class="sectionHeader">Link Status</h3>
+            <p class="case"><b>Issue:</b> <%= lsIssue %></p>
+            <p class="summary"><b>Summary:</b> <%= lsSummary %> </p>
+            <p class="action"><b>Action:</b> <%= lsAction %> </p>
+            <p class="mailRef"><b>Mail Ref:</b> <%= lsMailRef %></p>
+            <p class="date"><b>Date:</b> <%= lsDate %></p>
+            <p class="lastUpdated"><b>Last Updated:</b> <%= lsLastUpdated %> </p>
+        </div>
+        <div class="linkStatusEntry entryForm">
+            <form action="/linkStatus" method="post">
+                <label for="issue">Issue: </label>
+                <input type="text" name="issue" id="issue">
+                <label for="LSdate">Date: </label>
+                <input type="text" name="date" class="date_class" id="LSdate">
+                <label for="lsMailRef">Mail Reference: </label>
+                <input type="text" name="lsMailRef" id="lsMailRef">
+                <label for="lsSummary">Summary: </label>
+                <textarea name="lsSummary" id="lsSummary" cols="30" rows="10"></textarea>
+                <label for="lsAction">Action: </label>
+                <textarea name="lsAction" id="lsAction" cols="30" rows="10"></textarea>
+                <input type="hidden" name="lsLastUpdateDate" id="lsLastUpdateDate">
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </section>
+  
+    <hr>
+    <section class="backbone">
+            <div class="backboneDisplay">
+                <h3 class="sectionHeader">Backbone Issue</h3>
+                <p class="case"><b>Issue: </b></p>
+                <p class="summary"><b>Summary: </b></p>
+                <p class="action"><b>Action: </b></p>
+                <p class="mailRef"><b>Mail Ref:</b></p>
+                <p class="date">Date: </p>
+                <p class="lastUpdated">Last Updated: </p>
+            </div>
+            <div class="backboneEntry entryForm">
+                <form action="/backbone" method="post">
+                    <label for="bbIssue">Issue: </label>
+                    <input type="text" name="bbIssue" id="bbIssue">
+                    <label for="bbDate">Date: </label>
+                    <input type="text" name="date" class="date_class" id="bbDate">
+                    <label for="bbMailRef">Mail Reference: </label>
+                    <input type="text" name="bbMailRef" id="bbMailRef">
+                    <label for="bbSummary">Summary: </label>
+                    <textarea name="bbSummary" id="bbSummary" cols="30" rows="10"></textarea>
+                    <label for="bbAction">Action: </label>
+                    <textarea name="bbAction" id="bbAction" cols="30" rows="10"></textarea>
+                    <button type="submit">Enter</button>
+                    <button type="reset">Reset</button>
+                </form>
+            </div>
+    </section>
+   
+   
+    <hr>
+
+    <section class="followUp">
+        <div class="followUpDisplay">
+            <h3 class="sectionHeader">Follow-Up Issues</h3>
+            <p class="case"><b>Issue: </b></p>
+            <p class="summary"><b>Summary: </b></p>
+            <p class="action"><b>Action: </b></p>
+            <p class="mailRef"><b>Mail Ref:</b></p>
+            <p class="date">Date: </p>
+            <p class="lastUpdated">Last Updated: </p>
+        </div>
+        <div class="followUpEntry entryForm">
+            <form action="/followUp" method="post">
+                <label for="fuIssue">Issue: </label>
+                <input type="text" name="fuIssue" id="fuIssue">
+                <label for="fuDate">Date: </label>
+                <input type="text" name="date" class="date_class" id="fuDate">
+                <label for="fuMailRef">Mail Reference: </label>
+                <input type="text" name="fuMailRef" id="fuMailRef">
+                <label for="fuSummary">Summary: </label>
+                <textarea name="fuSummary" id="fuSummary" cols="30" rows="10"></textarea>
+                <label for="fuAction">Action: </label>
+                <textarea name="fuAction" id="fuAction" cols="30" rows="10"></textarea>
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section>
+        <div class="needToKnow">
+            <h3 class="sectionHeader">Need To Know</h3>
+            <ul>
+                <li class="listElement">If any VPN related documents come, need to forward it to Sajjad vai & Krishnendu da
+                    <span class="date">[]</span></li>
+            </ul>
+        </div>
+        <div class="importantEntry entryForm">
+            <form action="/important" method="post">
+                <label for="ntkInfo">Information: </label>
+                <input type="text" name="ntkInfo" id="ntkInfo">
+                <label for="ntkDate">Date: </label>
+                <input type="text" name="date" class="date_class" id="ntkDate">
+                <button type="submit">Enter</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="maintenance">
+        <div class="maintenanceDisplay">
+        <h3 class="sectionHeader">Maintenance</h3>
+        <table>
+            <tr>
+                <td><b>Maintenance ID</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Activity Window</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Activity Details</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Impact</b></td>
+                <td></td>
+            </tr>
+        </table>
+        </div>
+        <div>
+            <form action="/maintenance" method="post">
+                <label for="id">Maintenance ID: </label>
+                <input type="text" name="id" id="id">
+                <label for="window">Maintenance Window: </label>
+                <textarea name="window" id="window" cols="30" rows="10"></textarea>
+                <label for="details">Activity Details: </label>
+                <textarea name="details" id="details" cols="30" rows="10"></textarea>
+                <label for="impact">Impact: </label>
+                <textarea name="impact" id="impact" cols="30" rows="10"></textarea>
+            </form>
+        </div>
+    </section>
+    <script src="/script.js"></script>
+</body>
+</html>
+
