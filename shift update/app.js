@@ -2,39 +2,29 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient, Collection } = require('mongodb');
+const mongoose = require("mongoose");
 const app = express();
 
 // connect to mongodb manually without Mongoose
 const url = "mongodb://localhost:27017";
 const client = new MongoClient(url);
+mongoose.connect('mongodb://localhost:27017/shiftupdateDB',{ useNewUrlParser: true, useUnifiedTopology: true });
 
 // Declare the name of DBs
-const mainDBName = "shiftupdateDB";
 const archiveDBName = "archiveDB";
 
 
-// Function for insert for "Information" and "Need to know"
+
+// Function for insert data into archive for "Information" and "Need to know"
 async function insertInfo (info,date,sectionName){
     // connect to database
     await client.connect();
     console.log("connected successfully to DB server");
 
     // create the database
-    const mainDB = client.db(mainDBName);
     const archiveDB = client.db(archiveDBName);
-
     // create the collection/table
-    const mainDBCollection = mainDB.collection(sectionName);
     const archiveDBCollection = archiveDB.collection(sectionName);
-
-    // insert the data into Main table
-    const insertMainData = await mainDBCollection.insertOne(
-        {
-            info: info,
-            date: date
-        }
-    );
-    
     // insert the data into Archive table
     const insertArchiveData = await archiveDBCollection.insertOne(
         {
@@ -44,21 +34,30 @@ async function insertInfo (info,date,sectionName){
     );
 } 
 
-async function readInfo(info,date,sectionName){
-    console.log();
+
+
+
+
+async function readDB(){
+    await client.connect();
+    console.log("connected successfully to DB server");
+
+    // create the database
+    const archiveDB = client.db(archiveDBName);
+    // create the collection/table
+    const archiveDBCollection = archiveDB.collection("importants");
+    // ==== read document
+    const findresult =  await archiveDBCollection.find({}).toArray()
+    return await Promise.resolve(findresult);
+
 }
+
+
 
 
 app.set("view engine","ejs")
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: false}))
-
-// mongoose.connect("mongodb://localhost:27017/shiftUpdateDB", {useNewUrlParser: true, useUnifiedTopology: true});
-
-// const importantSchema = new mongoose.Schema({
-//     date: String,
-//     info: String
-// });
 
 
 
@@ -113,10 +112,29 @@ let maintenanceDetails;
 let maintenanceImpact;
 
 
+let issueId = 0;
+
+// DB Schema declare
+
+const importantSchema = new mongoose.Schema({
+    info: String,
+    date: String
+});
+
+
+//DB Models
+const Important = mongoose.model("Important",importantSchema);
+    
+
 
 
 app.get("/",function(req,res){
+    var importantData;
+    readDB().then(value=>console.log(value));
+
     res.render("shiftUpdate",{
+        importantData:importantData,
+
         information:iInfo,
         iDate:iDate,
 
@@ -163,10 +181,17 @@ app.get("/",function(req,res){
 app.post("/important",function(req,res){
     iDate = req.body.date;
     iInfo = req.body.info;
-    insertInfo(iInfo,iDate,important)
+    issueId += 1;
+    insertInfo(iInfo,iDate,"importants")
     .catch(console.error)
     .finally(()=> client.close());
-    
+    const importantEntry = new Important();
+    importantEntry.info = iInfo;
+    importantEntry.date = iDate;
+
+
+    importantEntry.save();
+
     res.redirect("/");
 });
 
@@ -178,6 +203,7 @@ app.post("/serviceChange", function(req,res){
     scMailRef = req.body.scMailRef;
     scAction = req.body.activity;
     scLastUpdated = req.body.scLastUpdateDate;
+    issueId += 1;
     res.redirect("/");
 
 });
@@ -190,6 +216,7 @@ app.post("/linkStatus", function(req,res){
     lsSummary = req.body.lsSummary;
     lsAction = req.body.lsAction;
     lsLastUpdated = req.body.lsLastUpdateDate;
+    issueId += 1;
     res.redirect("/");
 
 });
@@ -203,6 +230,7 @@ app.post("/backbone", function(req,res){
     bbSummary = req.body.bbSummary;
     bbAction = req.body.bbAction;
     bbLastUpdated = req.body.bbLastUpdateDate;
+    issueId += 1;
     res.redirect("/");
 
 });
@@ -215,6 +243,7 @@ app.post("/followUp", function(req,res){
     fuSummary = req.body.fuSummary;
     fuAction = req.body.fuAction;
     fuLastUpdated = req.body.fuLastUpdateDate;
+    issueId += 1;
     res.redirect("/");
 
 });
@@ -224,6 +253,7 @@ app.post("/needToKnow",function(req,res){
     console.log(req.body)
     ntkDate = req.body.date;
     ntkInfo = req.body.ntkInfo;
+    issueId += 1;
     res.redirect("/");
 });
 
@@ -234,6 +264,7 @@ app.post("/maintenance",function(req,res){
     maintenanceWindow = req.body.window;
     maintenanceDetails = req.body.details;
     maintenanceImpact = req.body.impact;
+    issueId += 1;
     res.redirect("/");
 
 })
@@ -242,3 +273,6 @@ app.post("/maintenance",function(req,res){
 app.listen(3112, function(){
     console.log("App have started on port 3112");
 })
+
+
+

@@ -2,7 +2,7 @@
 1.
 
 C- CReate - On process
-R - read  - Pending
+R - read  - On process
 U - Update - Pending
 D - Delete  - Pending
 
@@ -27,8 +27,12 @@ D - Delete  - Pending
         <div class="importantDisplay">
             <h3 class="sectionHeader">Important</h3>
             <ul>
-                <li class="listElement"> <%= information %>  <span
-                        class="date">[<%= iDate %> ]</span></li>
+
+                 
+                        <li class="listElement">   <span
+                            class="date">[ ]</span></li>
+
+    
             </ul>
         </div>
         <div class="importantEntry entryForm">
@@ -69,6 +73,7 @@ D - Delete  - Pending
                 <label for="activity">Activity: </label>
                 <textarea name="activity" id="activity" cols="30" rows="10"></textarea>
                 <input type="hidden" name="scLastUpdateDate" id="scLastUpdateDate">
+                <input type="hidden" name="sectionTitle" value="information">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>
@@ -101,6 +106,7 @@ D - Delete  - Pending
                 <label for="lsAction">Action: </label>
                 <textarea name="lsAction" id="lsAction" cols="30" rows="10"></textarea>
                 <input type="hidden" name="lsLastUpdateDate" id="lsLastUpdateDate">
+                <input type="hidden" name="sectionTitle" value="linkStatus">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>
@@ -131,6 +137,7 @@ D - Delete  - Pending
                     <label for="bbAction">Action: </label>
                     <textarea name="bbAction" id="bbAction" cols="30" rows="10"></textarea>
                     <input type="hidden" name="bbLastUpdateDate" id="bbLastUpdateDate">
+                    <input type="hidden" name="sectionTitle" value="backbone">
                     <button type="submit">Enter</button>
                     <button type="reset">Reset</button>
                 </form>
@@ -163,6 +170,7 @@ D - Delete  - Pending
                 <label for="fuAction">Action: </label>
                 <textarea name="fuAction" id="fuAction" cols="30" rows="10"></textarea>
                 <input type="hidden" name="fuLastUpdateDate" id="fuLastUpdateDate">
+                <input type="hidden" name="sectionTitle" value="followUp">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>
@@ -185,6 +193,7 @@ D - Delete  - Pending
                 <input type="text" name="ntkInfo" id="ntkInfo">
                 <label for="ntkDate">Date: </label>
                 <input type="text" name="date" class="date_class" id="ntkDate">
+                <input type="hidden" name="sectionTitle" value="needToKnow">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>
@@ -225,6 +234,7 @@ D - Delete  - Pending
                 <textarea name="details" id="details" cols="30" rows="10"></textarea>
                 <label for="impact">Impact: </label>
                 <textarea name="impact" id="impact" cols="30" rows="10"></textarea>
+                <input type="hidden" name="sectionTitle" value="maintenance">
                 <button type="submit">Enter</button>
                 <button type="reset">Reset</button>
             </form>

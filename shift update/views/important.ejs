@@ -1,0 +1,24 @@
+<section class="important">
+    <div class="importantDisplay">
+        <h3 class="sectionHeader">Important</h3>
+        <ul>
+            <% importantData.forEach(function(element){ %>
+
+                <li class="listElement">
+                    <%= element.info %> <span class="date">[<%= element.date %> ]</span>
+                </li>
+
+                <% }); %>
+        </ul>
+    </div>
+    <div class="importantEntry entryForm">
+        <form action="/important" method="post">
+            <label for="info">Information: </label>
+            <input type="text" name="info" id="info" required>
+            <label for="idate">Date: </label>
+            <input type="text" name="date" class="date_class" id="idate">
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
