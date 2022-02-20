@@ -1,0 +1,44 @@
+<%- include("partials/header"); -%>
+<section class="maintenance">
+    <div class="maintenanceDisplay">
+    <h3 class="sectionHeader">Maintenance</h3>
+    <% mData.forEach(element => { %>
+     
+    
+    <table>
+        <tr>
+            <td><b>Maintenance ID</b></td>
+            <td><%= element.maintenanceId %> </td>
+        </tr>
+        <tr>
+            <td><b>Activity Window</b></td>
+            <td><%= element.maintenanceWindow %></td>
+        </tr>
+        <tr>
+            <td><b>Activity Details</b></td>
+            <td><%= element.maintenanceDetails %></td>
+        </tr>
+        <tr>
+            <td><b>Impact</b></td>
+            <td><%= element.maintenanceImpact %></td>
+        </tr>
+    </table>
+    <hr>
+    <% }) %>
+    </div>
+    <div>
+        <form action="/maintenance" method="post" id="maintenance">
+            <label for="id">Maintenance ID: </label>
+            <input type="text" name="id" id="id">
+            <label for="window">Maintenance Window: </label>
+            <textarea name="window" id="window" cols="30" rows="10"></textarea>
+            <label for="details">Activity Details: </label>
+            <textarea name="details" id="details" cols="30" rows="10"></textarea>
+            <label for="impact">Impact: </label>
+            <textarea name="impact" id="impact" cols="30" rows="10"></textarea>
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
+<%- include("partials/footer"); -%>

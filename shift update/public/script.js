@@ -1,6 +1,6 @@
 
 function date(){
-        let currentTime = new Date();
+    let currentTime = new Date();
     let hour = currentTime.getHours();
     let minute = currentTime.getMinutes();
     let second = currentTime.getSeconds();
@@ -11,9 +11,9 @@ function date(){
     let month = currentTime.getMonth();
     const week_days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+    month = month +1;
   
     shift = shift_check(hour);
-    console.log(hour)
     if (hour < 12){
         am_pm = "AM";
     } else {
@@ -58,14 +58,39 @@ const dateTime = time + " " + dateValue;
 const dateTimeShift = time + " " + dateValue + ", " + shiftValue;
 
 
-document.getElementById("idate").value = dateValue;
-document.getElementById("ntkDate").value = dateValue;
-document.getElementById("SCdate").value = dateTime;
-document.getElementById("LSdate").value = dateTime;
-document.getElementById("bbDate").value = dateTime;
-document.getElementById("fuDate").value = dateTime;
-document.getElementById("scLastUpdateDate").value = dateTimeShift;
-document.getElementById("lsLastUpdateDate").value = dateTimeShift;
-document.getElementById("bbLastUpdateDate").value = dateTimeShift;
-document.getElementById("fuLastUpdateDate").value = dateTimeShift;
-document.getElementById("updateHeader").innerHTML = "Shift Update || Date: " + dateValue;
+
+let section = document.getElementsByClassName("entryForm")[0].id;
+
+switch (section) {
+    case section="important":
+        document.getElementById("idate").value = dateValue;
+        break;
+    case section="followUp":
+        document.getElementById("fuDate").value = dateTime;
+        document.getElementById("fuLastUpdateDate").value = dateTimeShift;
+        break;
+    case section="linkStatus":
+        document.getElementById("LSdate").value = dateTime;
+        document.getElementById("lsLastUpdateDate").value = dateTimeShift;
+        break;
+    case section="needToKnow":
+        document.getElementById("ntkDate").value = dateValue;
+        break;
+    case section="serviceChange":
+        document.getElementById("scLastUpdateDate").value = dateTimeShift;
+        document.getElementById("SCdate").value = dateTime;
+        break;
+    case section="maintenance":
+        break;
+    case section="backbone":
+        document.getElementById("bbDate").value = dateTime;
+        document.getElementById("bbLastUpdateDate").value = dateTimeShift;
+        break;
+}
+
+
+
+
+// document.getElementById("updateHeader").innerHTML = "Shift Update || Date: " + dateValue;
+
+

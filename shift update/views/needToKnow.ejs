@@ -1,0 +1,24 @@
+<%- include("partials/header"); -%>
+<section class="needToKnow">
+    <div class="needToKnowDisplay">
+        <h3 class="sectionHeader">Need To Know</h3>
+        <ul>
+            <% ntkData.forEach(element => { %>
+            <li class="listElement"><%= element.info %> 
+                <span class="date">[ <%= element.date %>  ]</span></li>
+                <hr>
+            <% }) %>
+         </ul>
+    </div>
+    <div class="needToKnowEntry entryForm" id="needToKnow">
+        <form action="/needToKnow" method="post">
+            <label for="ntkInfo">Information: </label>
+            <input type="text" name="ntkInfo" id="ntkInfo">
+            <label for="ntkDate">Date: </label>
+            <input type="text" name="date" class="date_class" id="ntkDate">
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
+<%- include("partials/footer"); -%>

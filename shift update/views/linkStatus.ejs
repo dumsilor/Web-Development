@@ -1,0 +1,34 @@
+<%- include("partials/header"); -%>
+<section class="linkStatus">
+    <div class="linkStatusDisplay">
+        <h3 class="sectionHeader">Link Status</h3>
+
+        <% lsData.forEach(element => { %>
+        <p class="case"><b>Issue:</b> <%= element.case %></p>
+        <p class="summary"><b>Summary:</b> <%= element.summary %> </p>
+        <p class="action"><b>Action:</b> <%= element.action %> </p>
+        <p class="mailRef"><b>Mail Ref:</b> <%= element.mailRef %></p>
+        <p class="date"><b>Date:</b> <%= element.date %></p>
+        <p class="lastUpdated"><b>Last Updated:</b> <%= element.lastUpdate %> </p>
+        <hr>
+        <% }) %>
+    </div>
+    <div class="linkStatusEntry entryForm" id="linkStatus">
+        <form action="/linkStatus" method="post">
+            <label for="issue">Issue: </label>
+            <input type="text" name="issue" id="issue">
+            <label for="LSdate">Date: </label>
+            <input type="text" name="date" class="date_class" id="LSdate">
+            <label for="lsMailRef">Mail Reference: </label>
+            <input type="text" name="lsMailRef" id="lsMailRef">
+            <label for="lsSummary">Summary: </label>
+            <textarea name="lsSummary" id="lsSummary" cols="30" rows="10"></textarea>
+            <label for="lsAction">Action: </label>
+            <textarea name="lsAction" id="lsAction" cols="30" rows="10"></textarea>
+            <input type="hidden" name="lsLastUpdateDate" id="lsLastUpdateDate">
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
+<%- include("partials/footer"); -%>

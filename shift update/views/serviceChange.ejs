@@ -1,0 +1,38 @@
+<%- include("partials/header"); -%>
+
+<section class="serviceChange">
+    <div class="serviceChangeDisplay">
+        <h3 class="sectionHeader">Service Change(Upgrade/Downgrade/activation/deativation/Termination)</h3>
+        <hr>
+        <hr>
+        <% scData.forEach(element => { %>
+        <p class="case"><b>Client Name: </b><%= element.case %> </p>
+        <p class="action"><b>Activity: </b><%= element.action; %> </p>
+        <p class="rfs"><b>RFS: </b><%= element.rfs %> </p>
+        <p class="mailRef"><b>Mail Ref:</b> <%= element.mailRef %> </p>
+        <p class="date"><b>Date: </b><%= element.date %> </p>
+        <p class="lastUpdated"><b>Last Updated: </b><%= element.lastUpdate %> </p>
+        <hr>
+        <% }) %>
+    
+    </div>
+    <div class="serviceChangeEntry entryForm" id="serviceChange">
+        <form action="/serviceChange" method="post">
+            <label for="cName">Client Name: </label>
+            <input type="text" name="cName" id="cName" required>
+            <label for="SCdate">Date: </label>
+            <input type="text" name="date" class="date_class" id="SCdate" required>
+            <label for="rfs">RSF: </label>
+            <input type="text" name="rfs" id="rfs">
+            <label for="scMailRef">Mail Reference: </label>
+            <input type="text" name="scMailRef" id="scMailRef" required>
+            <label for="activity">Activity: </label>
+            <textarea name="activity" id="activity" cols="30" rows="10"></textarea>
+            <input type="hidden" name="scLastUpdateDate" id="scLastUpdateDate">
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
+
+<%- include("partials/footer"); -%>

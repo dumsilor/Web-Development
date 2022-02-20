@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient, Collection } = require('mongodb');
+const { default: mongoose } = require("mongoose");
 const app = express();
 
 // connect to mongodb manually without Mongoose
@@ -9,7 +10,7 @@ const url = "mongodb://localhost:27017";
 const client = new MongoClient(url);
 
 // Declare the name of DBs
-const mainDBName = "shiftupdateDB";
+// const mainDBName = "shiftupdateDB";
 const archiveDBName = "archiveDB";
 
 
@@ -20,20 +21,20 @@ async function insertInfo (info,date,sectionName){
     console.log("connected successfully to DB server");
 
     // create the database
-    const mainDB = client.db(mainDBName);
+    // const mainDB = client.db(mainDBName);
     const archiveDB = client.db(archiveDBName);
 
     // create the collection/table
-    const mainDBCollection = mainDB.collection(sectionName);
+    // const mainDBCollection = mainDB.collection(sectionName);
     const archiveDBCollection = archiveDB.collection(sectionName);
 
-    // insert the data into Main table
-    const insertMainData = await mainDBCollection.insertOne(
-        {
-            info: info,
-            date: date
-        }
-    );
+    // // insert the data into Main table
+    // const insertMainData = await mainDBCollection.insertOne(
+    //     {
+    //         info: info,
+    //         date: date
+    //     }
+    // );
     
     // insert the data into Archive table
     const insertArchiveData = await archiveDBCollection.insertOne(
@@ -44,21 +45,54 @@ async function insertInfo (info,date,sectionName){
     );
 } 
 
-async function readInfo(info,date,sectionName){
-    console.log();
-}
 
+async function insertUpdate (issue,action,summary,mailRef,date,lastDate,rfs,sectionName){
+    // connect to database
+    await client.connect();
+    // create the database
+    const archiveDB = client.db(archiveDBName);
+    // create the collection/table
+    const archiveDBCollection = archiveDB.collection(sectionName);
+    // insert the data into Archive table
+    const insertArchiveData = await archiveDBCollection.insertOne(
+        {
+            case:  issue,
+            action: action,
+            summary: summary,
+            mailRef: mailRef,
+            date: date,
+            lastUpdate: lastDate,
+            rfs: rfs
+
+        }
+    );
+} 
+
+async function insertMaintenance (maintenanceId,maintenanceWindow,maintenanceDetails,maintenanceImpact,sectionName){
+    // connect to database
+    await client.connect();
+    // create the database
+    const archiveDB = client.db(archiveDBName);
+    // create the collection/table
+    const archiveDBCollection = archiveDB.collection(sectionName);
+    // insert the data into Archive table
+    const insertArchiveData = await archiveDBCollection.insertOne(
+        {
+            maintenanceId: maintenanceId,
+            maintenanceWindow: maintenanceWindow,
+            maintenanceDetails: maintenanceDetails,
+            maintenanceImpact: maintenanceImpact
+
+        }
+    );
+} 
 
 app.set("view engine","ejs")
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: false}))
 
-// mongoose.connect("mongodb://localhost:27017/shiftUpdateDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/shiftUpdateDB", {useNewUrlParser: true, useUnifiedTopology: true});
 
-// const importantSchema = new mongoose.Schema({
-//     date: String,
-//     info: String
-// });
 
 
 
@@ -113,62 +147,87 @@ let maintenanceDetails;
 let maintenanceImpact;
 
 
+// DB schema
+const importantSchema = new mongoose.Schema({
+    date: String,
+    info: String
+});
+
+const updateSchema = new mongoose.Schema({
+    case:  String,
+    action: String,
+    summary: String,
+    mailRef: String,
+    date: String,
+    lastUpdate: String,
+    rfs: String
+});
+
+
+const maintenanceSchema = new mongoose.Schema ({
+    maintenanceId: String,
+    maintenanceWindow: String,
+    maintenanceDetails: String,
+    maintenanceImpact: String
+
+
+});
+
+// DB model
+const Important = new mongoose.model("important",importantSchema);
+const serviceChange = new mongoose.model("serviceChange",updateSchema);
+const linkStatus = new mongoose.model("linkStatus",updateSchema);
+const backbone = new mongoose.model("backbone",updateSchema);
+const followUp = new mongoose.model("followUp",updateSchema);
+const needToKnow = new mongoose.model("needToKnow",importantSchema);
+const maintenance = new mongoose.model("maintenance",maintenanceSchema);
+
+
+
 
 
 app.get("/",function(req,res){
-    res.render("shiftUpdate",{
-        information:iInfo,
-        iDate:iDate,
-
-        scDate:scDate,
-        scIssue:scIssue, 
-        rfs:rfs, 
-        scMailRef:scMailRef, 
-        scAction:scAction, 
-        scLastUpdated:scLastUpdated,
-
-        lsDate:lsDate,
-        lsIssue:lsIssue, 
-        lsMailRef:lsMailRef, 
-        lsSummary:lsSummary,
-        lsAction:lsAction, 
-        lsLastUpdated:lsLastUpdated,
-        
-        bbDate:bbDate,
-        bbIssue:bbIssue, 
-        bbMailRef:bbMailRef, 
-        bbSummary:bbSummary,
-        bbAction:bbAction, 
-        bbLastUpdated:bbLastUpdated,
-
-        fuDate:fuDate,
-        fuIssue:fuIssue, 
-        fuMailRef:fuMailRef, 
-        fuSummary:fuSummary,
-        fuAction:fuAction, 
-        fuLastUpdated:fuLastUpdated,
-
-        ntkInfo:ntkInfo,
-        ntkDate:ntkDate,
-
-        maintenanceId:maintenanceId,
-        maintenanceWindow:maintenanceWindow,
-        maintenanceDetails:maintenanceDetails,
-        maintenanceImpact:maintenanceImpact
-
-});
+    
     });
+
+
+app.get("/important",function(req,res){
+    Important.find({},function(err,data){
+        if (!err){
+            res.render("important",{
+                importantData:data
+            });
+        }
+        
+    })
+    
+});
 
 
 app.post("/important",function(req,res){
     iDate = req.body.date;
     iInfo = req.body.info;
-    insertInfo(iInfo,iDate,important)
+    let data = new Important();
+    data.info = iInfo;
+    data.date = iDate;
+    data.save();
+    insertInfo(iInfo,iDate,"importants")
     .catch(console.error)
     .finally(()=> client.close());
     
-    res.redirect("/");
+    res.redirect("/important");
 });
+
+app.get("/serviceChange",function(req,res){
+    serviceChange.find({},function(err,data){
+        if (!err){
+            res.render("serviceChange",{
+                scData:data
+            });
+        }
+        
+    })
+})
 
 
 app.post("/serviceChange", function(req,res){
@@ -178,10 +237,31 @@ app.post("/serviceChange", function(req,res){
     scMailRef = req.body.scMailRef;
     scAction = req.body.activity;
     scLastUpdated = req.body.scLastUpdateDate;
-    res.redirect("/");
+    let data = new serviceChange();
+    data.case = scIssue;
+    data.action = scAction;
+    data.rfs = rfs;
+    data.summary = "";
+    data.mailRef = scMailRef;
+    data.date = scDate;
+    data.lastUpdate = scLastUpdated;
+    data.save();
+    insertUpdate(scIssue,scAction,"",scMailRef,scDate,scLastUpdated,rfs,"servicechanges")
+    .catch(console.error)
+    .finally(()=> client.close());
+    res.redirect("/serviceChange");
 
 });
 
+app.get("/linkStatus", function(req,res){
+    linkStatus.find({}, function(err,data){
+        if(!err){
+            res.render("linkStatus",{
+                lsData:data
+            });
+        }
+    });
+});
 
 app.post("/linkStatus", function(req,res){
     lsIssue = req.body.issue;
@@ -190,43 +270,121 @@ app.post("/linkStatus", function(req,res){
     lsSummary = req.body.lsSummary;
     lsAction = req.body.lsAction;
     lsLastUpdated = req.body.lsLastUpdateDate;
-    res.redirect("/");
+    let data = new linkStatus();
+    data.case = lsIssue;
+    data.action = lsAction;
+    data.rfs = "";
+    data.summary = lsSummary;
+    data.mailRef = lsMailRef;
+    data.date = lsDate;
+    data.lastUpdate = lsLastUpdated;
+    data.save();
+    insertUpdate(lsIssue,lsAction,lsSummary,lsMailRef,lsDate,lsLastUpdated,"","linkStatuses")
+    .catch(console.error)
+    .finally(()=> client.close());
+    res.redirect("/linkStatus");
 
 });
 
-
+app.get("/backbone",function(req,res){
+    backbone.find({}, function(err,data){
+        if(!err){
+            res.render("backbone",{
+                bbData:data
+            });
+        }
+    });
+});
 
 app.post("/backbone", function(req,res){
-    bbIssue = req.body.bbissue;
+    bbIssue = req.body.bbIssue;
     bbDate = req.body.date;
     bbMailRef = req.body.bbMailRef;
     bbSummary = req.body.bbSummary;
     bbAction = req.body.bbAction;
     bbLastUpdated = req.body.bbLastUpdateDate;
-    res.redirect("/");
+    let data = new backbone();
+    data.case = bbIssue;
+    data.action = bbAction;
+    data.rfs = "";
+    data.summary = bbSummary;
+    data.mailRef = bbMailRef;
+    data.date = bbDate;
+    data.lastUpdate = bbLastUpdated;
+    data.save();
+    insertUpdate(bbIssue,bbAction,bbSummary,bbMailRef,bbDate,bbLastUpdated,"","backbones")
+    .catch(console.error)
+    .finally(()=> client.close());
+    res.redirect("/backbone");
 
 });
 
+app.get("/followUp",function(req,res){
+    followUp.find({}, function(err,data){
+        if(!err){
+            res.render("followUp",{
+                fuData:data
+            });
+        }
+    });
+});
 
 app.post("/followUp", function(req,res){
-    fuIssue = req.body.fuissue;
+    fuIssue = req.body.fuIssue;
     fuDate = req.body.date;
     fuMailRef = req.body.fuMailRef;
     fuSummary = req.body.fuSummary;
     fuAction = req.body.fuAction;
     fuLastUpdated = req.body.fuLastUpdateDate;
-    res.redirect("/");
+    let data = new followUp();
+    data.case = fuIssue;
+    data.action = fuAction;
+    data.rfs = "";
+    data.summary = fuSummary;
+    data.mailRef = fuMailRef;
+    data.date = fuDate;
+    data.lastUpdate = fuLastUpdated;
+    data.save();
+    insertUpdate(fuIssue,fuAction,fuSummary,fuMailRef,fuDate,fuLastUpdated,"","followUps")
+    .catch(console.error)
+    .finally(()=> client.close());
+    res.redirect("/followUp");
 
 });
 
+
+app.get("/needToKnow", function(req,res){
+    needToKnow.find({}, function(err,data){
+        if(!err){
+            res.render("needToKnow",{
+                ntkData:data
+            });
+        }
+    });
+});
 
 app.post("/needToKnow",function(req,res){
     console.log(req.body)
     ntkDate = req.body.date;
     ntkInfo = req.body.ntkInfo;
-    res.redirect("/");
+    let data = new needToKnow();
+    data.info = ntkInfo;
+    data.date = ntkDate;
+    data.save();
+    insertInfo(ntkInfo,ntkDate,"needtoknows")
+    .catch(console.error)
+    res.redirect("/needToKnow");
 });
 
+app.get("/maintenance",function(req,res){
+    maintenance.find({}, function(err,data){
+        if(!err){
+            res.render("maintenance",{
+                mData:data
+            });
+        }
+    });
+})
 
 app.post("/maintenance",function(req,res){
     console.log(req.body);
@@ -234,7 +392,15 @@ app.post("/maintenance",function(req,res){
     maintenanceWindow = req.body.window;
     maintenanceDetails = req.body.details;
     maintenanceImpact = req.body.impact;
-    res.redirect("/");
+    let data = new maintenance();
+    data.maintenanceId = maintenanceId;
+    data.maintenanceWindow = maintenanceWindow;
+    data.maintenanceDetails = maintenanceDetails;
+    data.maintenanceImpact = maintenanceImpact;
+    data.save();
+    insertMaintenance(maintenanceId,maintenanceWindow,maintenanceDetails,maintenanceImpact,"maintenences")
+    .catch(console.error)
+    res.redirect("/maintenance");
 
 })
 

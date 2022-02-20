@@ -1,0 +1,33 @@
+<%- include("partials/header"); -%>
+<section class="followUp">
+    <div class="followUpDisplay">
+        <h3 class="sectionHeader">Follow-Up Issues</h3>
+        <% fuData.forEach(element => { %>
+            <p class="case"><b>Issue: </b><%= element.case %> </p>
+            <p class="action"><b>Activity: </b><%= element.action; %> </p>
+            <p class="summary"><b>Summary: </b><%= element.summary %> </p>
+            <p class="mailRef"><b>Mail Ref:</b> <%= element.mailRef %> </p>
+            <p class="date"><b>Date: </b><%= element.date %> </p>
+            <p class="lastUpdated"><b>Last Updated: </b><%= element.lastUpdate %> </p>
+            <hr>
+            <% }) %>
+    </div>
+    <div class="followUpEntry entryForm" id="followUp">
+        <form action="/followUp" method="post">
+            <label for="fuIssue">Issue: </label>
+            <input type="text" name="fuIssue" id="fuIssue">
+            <label for="fuDate">Date: </label>
+            <input type="text" name="date" class="date_class" id="fuDate">
+            <label for="fuMailRef">Mail Reference: </label>
+            <input type="text" name="fuMailRef" id="fuMailRef">
+            <label for="fuSummary">Summary: </label>
+            <textarea name="fuSummary" id="fuSummary" cols="30" rows="10"></textarea>
+            <label for="fuAction">Action: </label>
+            <textarea name="fuAction" id="fuAction" cols="30" rows="10"></textarea>
+            <input type="hidden" name="fuLastUpdateDate" id="fuLastUpdateDate">
+            <button type="submit">Enter</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</section>
+<%- include("partials/footer"); -%>
