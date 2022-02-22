@@ -50,6 +50,13 @@ function shift_check(hour){
 
 }
 
+
+function editimportant(){
+    document.getElementById("editImportant").style.visibility = "visible";
+}
+
+
+
 const dateObject = date();
 const dateValue = dateObject.date;
 const time = dateObject.time;
@@ -60,29 +67,29 @@ const dateTimeShift = time + " " + dateValue + ", " + shiftValue;
 
 
 let section = document.getElementsByClassName("entryForm")[0].id;
-
+console.log(section);
 switch (section) {
-    case section="important":
+    case "important":
         document.getElementById("idate").value = dateValue;
         break;
-    case section="followUp":
+    case "followUp":
         document.getElementById("fuDate").value = dateTime;
         document.getElementById("fuLastUpdateDate").value = dateTimeShift;
         break;
-    case section="linkStatus":
+    case "linkStatus":
         document.getElementById("LSdate").value = dateTime;
         document.getElementById("lsLastUpdateDate").value = dateTimeShift;
         break;
-    case section="needToKnow":
+    case "needToKnow":
         document.getElementById("ntkDate").value = dateValue;
         break;
-    case section="serviceChange":
+    case "serviceChange":
         document.getElementById("scLastUpdateDate").value = dateTimeShift;
         document.getElementById("SCdate").value = dateTime;
         break;
-    case section="maintenance":
+    case "maintenance":
         break;
-    case section="backbone":
+    case "backbone":
         document.getElementById("bbDate").value = dateTime;
         document.getElementById("bbLastUpdateDate").value = dateTimeShift;
         break;

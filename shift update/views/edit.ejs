@@ -1,0 +1,125 @@
+<%- include("partials/header"); -%>
+<% if (section === "important") { %>
+    <div class="importantEntry entryForm" id="important">
+        <form action="/update/<%= section %>" method="post">
+            <label for="info">Information: </label>
+            <input type="text" name="info" id="info" value="<%= data[0].info %>" required>
+            <input type="hidden" name="id" value="<%= data[0]._id %>">
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+<% } else if (section === "servicechange") { %>
+        <div class="serviceChangeEntry entryForm" id="serviceChange">
+            <form action="/update/<%= section %>" method="post">
+                <label for="scName">Client Name: </label>
+                <input type="text" name="scName" id="scName" value="<%= data[0].case %>" required>
+                <label for="rfs">RSF: </label>
+                <input type="text" name="rfs" id="rfs" value="<%= data[0].rfs %>">
+                <label for="scMailRef">Mail Reference: </label>
+                <input type="text" name="scMailRef" id="scMailRef" value="<%= data[0].mailRef %>" required>
+                <label for="activity">Activity: </label>
+                <textarea name="activity" id="activity" cols="30" rows="10"><%= data[0].action %></textarea>
+                <input type="hidden" name="scLastUpdateDate" id="scLastUpdateDate">
+                <input type="hidden" name="id" value="<%= data[0]._id %>">
+                <input type="hidden" name="date" class="date_class" id="SCdate">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+
+<% } else if (section === "linkstatus") { %>
+        <div class="linkStatusEntry entryForm" id="linkStatus">
+            <form action="/update/<%= section %>" method="post">
+                <label for="issue">Issue: </label>
+                <input type="text" name="issue" id="issue" value="<%= data[0].case %>">
+                <label for="lsMailRef">Mail Reference: </label>
+                <input type="text" name="lsMailRef" id="lsMailRef" value="<%= data[0].mailRef %>">
+                <label for="lsSummary">Summary: </label>
+                <textarea name="lsSummary" id="lsSummary" cols="30" rows="10"><%= data[0].summary %></textarea>
+                <label for="lsAction">Action: </label>
+                <textarea name="lsAction" id="lsAction" cols="30" rows="10"><%= data[0].action %></textarea>
+                <input type="text" name="lsLastUpdateDate" id="lsLastUpdateDate">
+                <input type="hidden" name="date" class="date_class" id="LSdate">
+                <input type="hidden" name="id" value="<%= data[0]._id %>">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+<% } else if (section === "backbone") { %>
+    <div class="backboneEntry entryForm" id="backbone">
+        <form action="/update/<%= section %>" method="post">
+            <label for="bbIssue">Issue: </label>
+            <input type="text" name="bbIssue" id="bbIssue"  value="<%= data[0].case %>">
+            <label for="bbMailRef">Mail Reference: </label>
+            <input type="text" name="bbMailRef" id="bbMailRef" value="<%= data[0].mailRef %>">
+            <label for="bbSummary">Summary: </label>
+            <textarea name="bbSummary" id="bbSummary" cols="30" rows="10"><%= data[0].summary %></textarea>
+            <label for="bbAction">Action: </label>
+            <textarea name="bbAction" id="bbAction" cols="30" rows="10"><%= data[0].action %></textarea>
+            <input type="hidden" name="bbLastUpdateDate" id="bbLastUpdateDate">
+            <input type="hidden" name="id" value="<%= data[0]._id %>">
+            <input type="hidden" name="date" class="date_class" id="bbDate">
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+
+<% } else if (section === "followup") { %>
+        <div class="followUpEntry entryForm" id="followUp">
+            <form action="/update/<%= section %>" method="post">
+                <label for="fuIssue">Issue: </label>
+                <input type="text" name="fuIssue" id="fuIssue" value="<%= data[0].case %>">
+                <label for="fuMailRef">Mail Reference: </label>
+                <input type="text" name="fuMailRef" id="fuMailRef" value="<%= data[0].mailRef %>">
+                <label for="fuSummary">Summary: </label>
+                <textarea name="fuSummary" id="fuSummary" cols="30" rows="10"><%= data[0].summary %></textarea>
+                <label for="fuAction">Action: </label>
+                <textarea name="fuAction" id="fuAction" cols="30" rows="10"><%= data[0].action %></textarea>
+                <input type="hidden" name="fuLastUpdateDate" id="fuLastUpdateDate">
+                <input type="hidden" name="id" value="<%= data[0]._id %>">
+                <input type="hidden" name="date" class="date_class" id="fuDate">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+
+<% } else if (section === "needtoknow") { %>
+        <div class="needToKnowEntry entryForm" id="needToKnow">
+            <form action="/update/<%= section %>" method="post">
+                <label for="ntkInfo">Information: </label>
+                <input type="text" name="ntkInfo" id="ntkInfo"  value="<%= data[0].info %>">
+                <input type="hidden" name="id" value="<%= data[0]._id %>">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+
+<% } else if (section === "maintenance") { %>
+        <div>
+            <form action="/update/<%= section %>" method="post" id="maintenance">
+                <label for="mId">Maintenance ID: </label>
+                <input type="text" name="mId" id="mId" value="<%= data[0].maintenanceId %>">
+                <label for="window">Maintenance Window: </label>
+                <textarea name="window" id="window" cols="30" rows="10"><%= data[0].maintenanceWindow %></textarea>
+                <label for="details">Activity Details: </label>
+                <textarea name="details" id="details" cols="30" rows="10"><%= data[0].maintenanceDetails %></textarea>
+                <label for="impact">Impact: </label>
+                <textarea name="impact" id="impact" cols="30" rows="10"><%= data[0].maintenanceImpact %></textarea>
+                <input type="hidden" name="id" value="<%= data[0]._id %>">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+
+<% } %> 
+
+
+
+
+
+<%- include("partials/footer"); -%>

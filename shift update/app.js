@@ -147,6 +147,9 @@ let maintenanceDetails;
 let maintenanceImpact;
 
 
+let id;
+let section;
+
 // DB schema
 const importantSchema = new mongoose.Schema({
     date: String,
@@ -185,7 +188,6 @@ const maintenance = new mongoose.model("maintenance",maintenanceSchema);
 
 
 
-
 app.get("/",function(req,res){
     
     });
@@ -217,6 +219,79 @@ app.post("/important",function(req,res){
     
     res.redirect("/important");
 });
+
+
+
+app.get("/edit",function(req,res){
+    switch (section) {
+        case "important":
+            Important.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "servicechange":
+            serviceChange.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "linkstatus":
+            linkStatus.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "backbone":
+            backbone.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "followup":
+            followUp.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "needtoknow":
+            needToKnow.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+        case "maintenance":
+            maintenance.find({_id:id},function(err,data){
+                res.render("edit",{
+                    data:data,
+                    section:section
+                });
+            });
+            break;
+    }
+});
+
+
+app.post("/edit",function(req,res){
+    id = req.body.id;
+    section = req.body.section;
+    res.redirect("/edit");
+});
+
+
+
 
 app.get("/serviceChange",function(req,res){
     serviceChange.find({},function(err,data){
@@ -388,7 +463,7 @@ app.get("/maintenance",function(req,res){
 
 app.post("/maintenance",function(req,res){
     console.log(req.body);
-    maintenanceId = req.body.id;
+    maintenanceId = req.body.mId;
     maintenanceWindow = req.body.window;
     maintenanceDetails = req.body.details;
     maintenanceImpact = req.body.impact;
@@ -404,6 +479,211 @@ app.post("/maintenance",function(req,res){
 
 })
 
+
+app.post("/update/:section",function(req,res){
+    console.log(req.body);
+    let filter = {
+        _id: req.body.id
+    };
+    let update;
+    switch (section) {  
+        case "important":
+            update = {
+                info:req.body.info
+            }
+            Important.findOneAndUpdate(filter,{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+                }
+            });
+            res.redirect("/important");
+            break;
+        case "servicechange":
+            update = {
+                case:  req.body.scName,
+                action: req.body.activity,
+                mailRef: req.body.scMailRef,
+                lastUpdate: req.body.scLastUpdateDate,
+                rfs: req.body.rfs
+            }
+            serviceChange.findOneAndUpdate(filter,{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/serviceChange");
+            break;
+        case "linkstatus":
+            update = {
+                case:  req.body.issue,
+                action: req.body.lsAction,
+                mailRef: req.body.lsMailRef,
+                lastUpdate: req.body.lsLastUpdateDate,
+                summary: req.body.lsSummary
+            }
+            linkStatus.findOneAndUpdate(filter,{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/linkStatus");
+            break;
+        case "backbone":
+            update = {
+                case:  req.body.bbIssue,
+                action: req.body.bbAction,
+                mailRef: req.body.bbMailRef,
+                lastUpdate: req.body.bbLastUpdateDate,
+                summary: req.body.bbSummary
+            }
+            backbone.findOneAndUpdate(filter,{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/backbone");
+            break;
+        case "followup":
+            update = {
+                case:  req.body.fuIssue,
+                action: req.body.fuAction,
+                mailRef: req.body.fuMailRef,
+                lastUpdate: req.body.fuLastUpdateDate,
+                summary: req.body.fuSummary
+            }
+            followUp.findOneAndUpdate(filter,{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/followUp");
+            break;
+        case "needtoknow":
+            update = {
+                info:req.body.ntkInfo
+            }
+            needToKnow.findOneAndUpdate({_id:id},{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/needToKnow");
+            break;
+        case "maintenance":
+            update = {
+                maintenanceId : req.body.mId,
+                maintenanceWindow : req.body.window,
+                maintenanceDetails : req.body.details,
+                maintenanceImpact : req.body.impact
+            }
+            maintenance.findOneAndUpdate({_id:id},{$set:update},function(err,doc){
+                if(!err){
+                    console.log("Updated " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/maintenance");
+            break;
+
+        
+    }
+})
+
+let sectionName;
+
+app.post("/delete/:sectionName",function(req,res){
+    let filter = {
+        _id: req.body.id
+    };
+    section = req.body.section;
+    console.log(filter);
+    switch (section) {  
+        case "important":
+            Important.findOneAndDelete(filter,function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/important");
+            break;
+        case "servicechange":
+            serviceChange.findOneAndDelete(filter,function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/serviceChange");
+            break;
+        case "linkstatus":
+            linkStatus.findOneAndDelete(filter,function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/linkStatus");
+            break;
+        case "backbone":
+            backbone.findOneAndDelete(filter,function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/backbone");
+            break;
+        case "followup":
+            followUp.findOneAndDelete(filter,function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/followUp");
+            break;
+        case "needtoknow":
+            needToKnow.findOneAndDelete({_id:id},function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/needToKnow");
+            break;
+        case "maintenance":
+            maintenance.findOneAndDelete({_id:id},function(err,doc){
+                if(!err){
+                    console.log("Deleted " + doc)
+                    mongoose.connection.close()
+
+                }
+            });
+            res.redirect("/maintenance");
+            break;
+
+        
+    }
+});
 
 app.listen(3112, function(){
     console.log("App have started on port 3112");

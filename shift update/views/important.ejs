@@ -4,11 +4,21 @@
             <h3 class="sectionHeader">Important</h3>
             <ul>
                 <% importantData.forEach(element => {  %>
+                       
                      <li class="listElement"> <%= element.info %>  <span
                         class="date">[<%= element.date %> ]</span></li>
+                     
+                        <form action="/edit" method="post">
+                            <input type="hidden" name="id" value=<%= element._id %> >
+                            <input type="hidden" name="section" value="important" >
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/delete/important" method="post">
+                            <input type="hidden" name="id" value=<%= element._id %> >
+                            <input type="hidden" name="section" value="important" >
+                            <button type="submit">Delete</button>
+                        </form>
                         <% }); %>
-                        
-
             </ul>
         </div>
         <div class="importantEntry entryForm" id="important">

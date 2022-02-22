@@ -23,13 +23,23 @@
             <td><%= element.maintenanceImpact %></td>
         </tr>
     </table>
+    <form action="/edit" method="post">
+        <input type="hidden" name="id" value=<%= element._id %> >
+        <input type="hidden" name="section" value="maintenance" >
+        <button type="submit">Edit</button>
+    </form>
+    <form action="/delete/maintenance" method="post">
+        <input type="hidden" name="id" value=<%= element._id %> >
+        <input type="hidden" name="section" value="maintenance" >
+        <button type="submit">Delete</button>
+    </form>
     <hr>
     <% }) %>
     </div>
     <div>
         <form action="/maintenance" method="post" id="maintenance">
-            <label for="id">Maintenance ID: </label>
-            <input type="text" name="id" id="id">
+            <label for="mId">Maintenance ID: </label>
+            <input type="text" name="mId" id="mId">
             <label for="window">Maintenance Window: </label>
             <textarea name="window" id="window" cols="30" rows="10"></textarea>
             <label for="details">Activity Details: </label>
