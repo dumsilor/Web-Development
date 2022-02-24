@@ -11,16 +11,6 @@
         <p class="mailRef"><b>Mail Ref: </b><%= element.mailRef %></p>
         <p class="date"><b>Date: </b><%= element.date %> </p>
         <p class="lastUpdated"><b>Last Updated: </b><%= element.lastUpdate %></p>
-        <form action="/edit" method="post">
-            <input type="hidden" name="id" value=<%= element._id %> >
-            <input type="hidden" name="section" value="backbone" >
-            <button type="submit">Edit</button>
-        </form>
-        <form action="/delete/backbone" method="post">
-            <input type="hidden" name="id" value=<%= element._id %> >
-            <input type="hidden" name="section" value="backbone" >
-            <button type="submit">Delete</button>
-        </form>
         <hr>
         <% }) %>
     </div>

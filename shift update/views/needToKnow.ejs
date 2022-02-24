@@ -6,12 +6,7 @@
             <% ntkData.forEach(element => { %>
             <li class="listElement"><%= element.info %> 
                 <span class="date">[ <%= element.date %>  ]</span></li>
-                <form action="/edit" method="post">
-                    <input type="hidden" name="id" value=<%= element._id %> >
-                    <input type="hidden" name="section" value="needtoknow" >
-                    <button type="submit">Edit</button>
-                    <button type="submit">Delete</button>
-                </form>
+                <hr>
             <% }) %>
          </ul>
     </div>
