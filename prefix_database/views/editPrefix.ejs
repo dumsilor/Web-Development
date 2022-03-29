@@ -1,0 +1,48 @@
+<%- include("partials/header"); -%>
+<%- include("partials/navbar"); -%>
+<h1>Edit Entry for <%= data[0].prefixName %></h1>
+    <div id="mainForm">
+        <form action="/updatePrefix" method="post">
+            <label for="prefixName">Prefix List Name: </label>
+            <input type="text" name="prefixName" id="prefixName" required autocomplete="off" placeholder="prefix_name" value=<%= data[0].prefixName %> >
+            
+            <label for="prefix">Prefixes: </label>
+            <textarea type="text" name="prefix" id="prefix" required autocomplete="off"><%= data[0].prefix %></textarea>
+            
+            <label for="bsccl">BSCCL Seq: </label>
+            <input type="text" name="bsccl" id="bsccl"  required autocomplete="off" value=<%= data[0].bsccl %>>
+            
+            <label for="pathBsccl">Path Prepend - BSCCL:  </label>
+            <input type="text" name="pathBsccl" id="pathBsccl" required autocomplete="off" value=<%= data[0].pathBsccl %>>
+            
+            <label for="airtel">Airtel Seq</label>
+            <input type="text" name="airtel" id="airtel" autocomplete="off" value=<%= data[0].airtel %>>
+            
+            <label for="pathAirtel">Path Prepend - Airtel: </label>
+            <input type="text" name="pathAirtel" id="pathAirtel" autocomplete="off" value=<%= data[0].pathAirtel %>>
+            
+            <label for="singtel">Singtel Seq</label>
+            <input type="text" name="singtel" id="singtel" autocomplete="off" value=<%= data[0].singtel %>>
+            
+            <label for="pathSingtel">Path Prepend - Singtel: </label>
+            <input type="text" name="pathSingtel" id="pathSingtel" autocomplete="off" value=<%= data[0].pathSingtel %>>
+            
+            <label for="tata">TATA Seq: </label>
+            <input type="tata" name="tata" id="tata" autocomplete="off" value=<%= data[0].tata %>>
+            
+            <label for="pathTata">Path Prepend - TATA: </label>
+            <input type="text" name="pathTata" id="pathTata" autocomplete="off" value=<%= data[0].pathTata %>>
+            
+            <label for="google">Google Seq: </label>
+            <input type="google" name="google" id="google" autocomplete="off" value=<%= data[0].google %>>
+            
+            <label for="pathGoogle">Path Prepend - Google: </label>
+            <input type="text" name="pathGoogle" id="pathGoogle" autocomplete="off" value=<%= data[0].pathGoogle %>>
+
+            <input type="hidden" name="id" id="id"  value=<%= data[0]._id %>>
+            
+            <button type="submit" class="button-56" role="button">Enter</button>
+            <button class="button-56" role="button" onclick="history.back()">Back</button>
+        </form>
+    </div>
+<%- include("partials/footer"); -%>

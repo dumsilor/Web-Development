@@ -1,0 +1,24 @@
+<%- include("partials/header"); -%>
+<%- include("partials/navbar"); -%>
+<div class="form-2">
+    <form action="/update" method="post">
+        <label for="description">Name: </label>
+        <input type="text" name="description" id="description" required value="<%= data[0].description %>">
+        <label for="dest_ip">Destination IP: </label>
+        <input type="text" name="dest_ip" id="dest_ip" placeholder="8.8.8.8" required value="<%= data[0].dest_ip %>">
+        <label for="subnet">Subnet: </label>
+        <input type="text" name="subnet" id="sebnet" placeholder="/24" required value="<%= data[0].subnet %>">
+        <label for="next_hop">Next Hop: </label>
+        <input type="text" name="next_hop" id="next_hop" required value="<%= data[0].next_hop %>">
+        <label for="nextHopName">Next Hop Name</label>
+        <input type="text" name="nextHopName" id="nextHopName" value="<%= data[0].nextHopName %>">
+        <label for="tag">Tag: </label>
+        <input type="text" name="tag" id="tag" value="<%= data[0].tag %>">
+        <label for="cost">Cost: </label>
+        <input type="cost" name="cost" id="cost" value="<%= data[0].cost %>">
+        <input type="hidden" name="id" id="id" value="<%= data[0]._id %>">
+        <button type="submit" class="button-56" role="button">Enter</button>
+        <button class="button-56" role="button" onclick="history.back()">Back</button>
+    </form>
+</div>
+<%- include("partials/footer"); -%>

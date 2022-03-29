@@ -1,0 +1,105 @@
+<%- include("partials/header"); -%>
+<%- include("partials/navbar"); -%>
+<h1>Prefix List Database</h1>
+<section>
+    <table class="staticTable" style="border:1px solid green;" style="border:1px solid green;" >
+        <thead >
+            <tr>
+                <th  class="prefix_name">Prefix-list Name</th>
+                <th >Prefixes</th>
+                <th >RMAP Seq- BSCCL</th>
+                <th >Path-prepend - BSCCL</th>
+                <th >RMAP Seq- Airtel</th>
+                <th >Path-prepend - Airtel</th>
+                <th >RMAP Seq- Singtel</th>
+                <th >Path-prepend - Singtel</th>
+                <th >RMAP Seq- TATA</th>
+                <th >Path-prepend - TATA</th>
+                <th >RMAP Seq- Google</th>
+                <th >Path-prepend - Google</th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <%  pData.forEach(element => { %>
+                <tr>
+                    <td style="border:1px solid green;" ><%= element.prefixName %> </td>
+                    <td style="border:1px solid green;"  class="prefix"><%= element.prefix %> </td>
+                    <td style="border:1px solid green;" ><%= element.bsccl %> </td>
+                    <td style="border:1px solid green;" ><%= element.pathBsccl %> </td>
+                    <td style="border:1px solid green;" ><%= element.airtel %> </td>
+                    <td style="border:1px solid green;" ><%= element.pathAirtel %> </td>
+                    <td style="border:1px solid green;" ><%= element.singtel %></td>
+                    <td style="border:1px solid green;" ><%= element.pathSingtel %> </td>
+                    <td style="border:1px solid green;" ><%= element.tata%></td>
+                    <td style="border:1px solid green;" ><%= element.pathTata%></td>
+                    <td style="border:1px solid green;" ><%= element.google%></td>
+                    <td style="border:1px solid green;" ><%= element.pathGoogle%></td>
+                    
+                    <td style="border:1px solid green;" >
+                        <form action="/editPrefix" method="post">
+                        <input type="hidden" name="id" value="<%= element._id %>">
+                        <button class="button-55" role="button">Edit</button>
+
+                    </form></td>
+
+                    <td style="border:1px solid green;">
+                        <form action="/deletePrefix" method="post" id="<%= element._id %>">
+                            <input type="hidden" name="id" value="<%= element._id %>">
+                            <button type="submit" class="button-32" role="button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <button  class="button-56" role="button" onclick="hideDiv()">Add entry</button>
+    <div class="form" id="mainForm">
+        <form action="/prefix" method="post">
+            <label for="prefixName">Prefix List Name: </label>
+            <input type="text" name="prefixName" id="prefixName" required autocomplete="off" placeholder="prefix_name">
+            
+            <label for="prefix">Prefixes: </label>
+            <textarea type="text" name="prefix" id="prefix" placeholder="103.248.12.0/24" required autocomplete="off"></textarea>
+            
+            <label for="bsccl">BSCCL Seq: </label>
+            <input type="text" name="bsccl" id="bsccl" placeholder="255.255.255.255" required autocomplete="off">
+            
+            <label for="pathBsccl">Path Prepend - BSCCL:  </label>
+            <input type="text" name="pathBsccl" id="pathBsccl" required autocomplete="off">
+            
+            <label for="airtel">Airtel Seq</label>
+            <input type="text" name="airtel" id="airtel" autocomplete="off">
+            
+            <label for="pathAirtel">Path Prepend - Airtel: </label>
+            <input type="text" name="pathAirtel" id="pathAirtel" autocomplete="off">
+            
+            <label for="singtel">Singtel Seq</label>
+            <input type="text" name="singtel" id="singtel" autocomplete="off">
+            
+            <label for="pathSingtel">Path Prepend - Singtel: </label>
+            <input type="text" name="pathSingtel" id="pathSingtel" autocomplete="off">
+            
+            <label for="tata">TATA Seq: </label>
+            <input type="tata" name="tata" id="tata" autocomplete="off">
+            
+            <label for="pathTata">Path Prepend - TATA: </label>
+            <input type="text" name="pathTata" id="pathTata" autocomplete="off">
+            
+            <label for="google">Google Seq: </label>
+            <input type="google" name="google" id="google" autocomplete="off">
+            
+            <label for="pathGoogle">Path Prepend - Google: </label>
+            <input type="text" name="pathGoogle" id="pathGoogle" autocomplete="off">
+            
+            <button type="submit" class="button-56" role="button">Enter</button>
+            <button class="button-56" role="button">Reset</button>
+        </form>
+    </div>
+    
+</section>
+
+<%- include("partials/footer"); -%>

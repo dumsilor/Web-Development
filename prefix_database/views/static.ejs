@@ -1,0 +1,76 @@
+<%- include("partials/header"); -%>
+<%- include("partials/navbar"); -%>
+<h1>Static IP Database</h1>
+<section>
+    <table class="staticTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Destinatin IP</th>
+                <th>Subnet</th>
+                <th>Next Hop</th>
+                <th>Next Hop Name</th>
+                <th>Tag</th>
+                <th>Matric</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <%  sData.forEach(element => { %>
+                <tr>
+                
+                    <td><%= element.description %> </td>
+                    <td><%= element.dest_ip %> </td>
+                    <td><%= element.subnet %> </td>
+                    <td><%= element.next_hop %> </td>
+                    <td><%= element.nextHopName %></td>
+                    <td><%= element.tag %> </td>
+                    <td><%= element.cost%></td>
+                    <td><form action="/edit" method="post">
+                        <input type="hidden" name="id" value="<%= element._id %>">
+                        <button class="button-55" role="button">Edit</button>
+
+                    </form></td>
+                    <td>
+                        <form action="/delete" method="post" id="<%= element._id %>">
+                            <input type="hidden" name="id" value="<%= element._id %>">
+                            <button type="submit" class="button-32" role="button">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <input type="text" style="display:none" id="config" value="ip route <%= element.dest_ip %> <%= element.subnet %> <%= element.next_hop %> name <%= element.description %> tag <%= element.tag %>  <%= element.cost%>">
+                        <button onclick="copy_conf()" class="button-48" role="button"><span class="text">Copy Config</span></button>
+
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <button  class="button-56" role="button" onclick="hideDiv()">Add entry</button>
+    <div class="form" id="mainForm">
+        <form action="/static" method="post">
+            <label for="description">Name: </label>
+            <input type="text" name="description" id="description" required autocomplete="off" placeholder="client_name">
+            <label for="dest_ip">Destination IP: </label>
+            <input type="text" name="dest_ip" id="dest_ip" placeholder="8.8.8.8" required autocomplete="off">
+            <label for="subnet">Subnet: </label>
+            <input type="text" name="subnet" id="sebnet" placeholder="255.255.255.255" required autocomplete="off">
+            <label for="next_hop">Next Hop: </label>
+            <input type="text" name="next_hop" id="next_hop" required autocomplete="off">
+            <label for="nextHopName">Next Hop Name</label>
+            <input type="text" name="nextHopName" id="nextHopName" autocomplete="off">
+            <label for="tag">Tag: </label>
+            <input type="text" name="tag" id="tag" autocomplete="off">
+            <label for="cost">Cost: </label>
+            <input type="cost" name="cost" id="cost" autocomplete="off">
+            <button type="submit" class="button-56" role="button">Enter</button>
+            <button class="button-56" role="button">Reset</button>
+        </form>
+    </div>
+    
+</section>
+
+<%- include("partials/footer"); -%>
